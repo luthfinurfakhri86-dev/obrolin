@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Keren dengan Animasi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans‑serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            color: #fff;
+            overflow‑x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            background: rgba(0,0,0,0.25);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #4fc3f7;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4fc3f7;
+        }
+
+        /* Bagian Hero / Depan */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease 0.3s forwards;
+        }
+
+        .btn {
+            padding: 0.9rem 2.2rem;
+            background: #4fc3f7;
+            color: #1a1a2e;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease 0.6s forwards;
+        }
+
+        .btn:hover {
+            background: #29b6f6;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px #4fc3f7;
+        }
+
+        /* Animasi teks muncul */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Kotak Fitur */
+        .features {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+        }
+
+        .feature-container {
+            display: grid;
+            grid-template-columns: repeat(auto‑fit, minmax(280px,1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.08);
+            padding: 30px;
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            transition: transform 0.4s ease, box‑shadow 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(79,195,247,0.25);
+        }
+
+        .card h3 {
+            margin-bottom: 12px;
+            color: #4fc3f7;
+        }
+
+        /* Partikel latar belakang */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="logo">WebKeren</div>
+        <div class="nav-links">
+            <a href="#home">Beranda</a>
+            <a href="#fitur">Fitur</a>
+            <a href="#tentang">Tentang</a>
+            <a href="#kontak">Kontak</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <h1>Selamat Datang di Website Keren</h1>
+        <p>Website dengan desain modern, animasi halus, dan efek partikel yang bergerak!</p>
+        <button class="btn" id="tombolAksi">Klik Disini</button>
+    </section>
+
+    <!-- Fitur -->
+    <section class="features" id="fitur">
+        <h2 class="section-title">Fitur Utama</h2>
+        <div class="feature-container">
+            <div class="card">
+                <h3>Desain Responsif</h3>
+                <p>Bisa dibuka di HP, tablet maupun laptop dengan tampilan yang nyaman.</p>
+            </div>
+            <div class="card">
+                <h3>Animasi Halus</h3>
+                <p>Efek muncul, melayang, dan partikel yang bergerak secara otomatis.</p>
+            </div>
+            <div class="card">
+                <h3>Latar Modern</h3>
+                <p>Gradasi warna dan efek blur kaca yang sedang tren sekarang.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 WebKeren - Semua hak dilindungi</p>
+    </footer>
+
+    <script>
+        // Efek partikel latar belakang
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+
+        let particles = [];
+        class Particle {
+            constructor() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if(this.x < 0) this.x = w;
+                if(this.x > w) this.x = 0;
+                if(this.y < 0) this.y = h;
+                if(this.y > h) this.y = 0;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                ctx.fillStyle = "rgba(79, 195, 247, 0.4)";
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            for(let i = 0; i < 80; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0,0,w,h);
+            for(let p of particles) {
+                p.update();
+                p.draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        init();
+        animateParticles();
+
+        // Sesuaikan ukuran canvas jika layar diganti
+        window.addEventListener('resize', () => {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+            init();
+        });
+
+        // Efek navbar saat di‑scroll
+        const nav = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 50) {
+                nav.style.background = "rgba(0,0,0,0.6)";
+            } else {
+                nav.style.background = "rgba(0,0,0,0.25)";
+            }
+        });
+
+        // Aksi tombol
+        const btn = document.getElementById('tombolAksi');
+        btn.addEventListener('click', () => {
+            alert('Wah kamu menekan tombolnya! 🎉');
+        });
+    </script>
+</body>
+</html>
